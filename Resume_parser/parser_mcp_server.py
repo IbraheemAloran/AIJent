@@ -48,6 +48,7 @@ class Profile(BaseModel):
     experience: List[Experience]
     projects: List[Projects]
     education: List[Education]
+    all_bullet_points_and_summary_and_skills: str
 
 class ResumeParser:
     def __init__(self):
@@ -63,10 +64,13 @@ class ResumeParser:
 
         self.chain = self.prompt | self.structured_model
 
-    def parse():
-        doc = fitz.open("Resume.pdf")
+    def parse(self, file_path):
+        doc = fitz.open(file_path)
         text = doc[0].get_text()
         result = self.chain.invoke({"input": text})
 
         with open("profile.json", "w") as f:
             json.dump(result, f, indent=2)
+
+        return result
+
