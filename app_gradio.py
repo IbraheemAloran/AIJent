@@ -8,6 +8,7 @@ import json
 import os
 from datetime import datetime
 from langchain.agents import create_agent
+from Embedder.embedding_mcp_server import embed_profile
 
 load_dotenv()
 
@@ -49,7 +50,9 @@ def parse_resume(file):
  
         # Parse resume
         parser = ResumeParser()
-        result = parser.parse(file)
+        parser.parse(file)
+        result = embed_profile()
+
         
         global resume_data
         resume_data = result if isinstance(result, dict) else {"parsed": str(result)}

@@ -20,7 +20,7 @@ def cosine_similarity(vec_a: List[float], vec_b: List[float]) -> float:
         return 0.0
     return float(np.dot(a, b) / denom)
 
-@tool
+
 def embed_profile():
         """Embeds the resume profile and saves the embedding in a json file
         
@@ -39,9 +39,9 @@ def embed_profile():
         with open("profile.json", "w") as f:
             json.dump(data, f, indent=2)
         
-        return vector
+        return data
 
-@tool
+
 def similarity_score(job: str):
     """Embeds a job posting and calculates the similarity score between profile embedding and job embedding
      
@@ -57,7 +57,7 @@ def similarity_score(job: str):
     return cosine_similarity(resume_embedding, job_embedding) >= APPLY
 
    
-EMBEDDING_TOOLS = [embed_profile, similarity_score]
+# EMBEDDING_TOOLS = [embed_profile, similarity_score]
 
 
 
