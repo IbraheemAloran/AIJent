@@ -4,7 +4,7 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.136+-green)
 ![LangChain](https://img.shields.io/badge/LangChain-1.2+-orange)
 
-An intelligent job search agent that uses AI embeddings and semantic matching to find the most relevant job opportunities based on your resume and preferences. AIJent leverages advanced NLP techniques, web scraping, and agentic workflows to streamline your job search process.
+An intelligent job search agent that uses AI embeddings and semantic matching to find the most relevant job opportunities based on your resume and preferences and automatically applies to jobs for you. AIJent leverages advanced web scraping, and agentic workflows to streamline your job search process.
 
 <img width="1902" height="951" alt="image" src="https://github.com/user-attachments/assets/f9f06aef-d011-418e-9256-3bcd05f9d684" />
 
