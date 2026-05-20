@@ -1,0 +1,30 @@
+[project]
+name = "aijent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "browser-use>=0.5.5",
+    "browser-use-sdk>=3.5.0",
+    "fastapi>=0.136.1",
+    "fastmcp>=3.2.4",
+    "google>=3.0.0",
+    "google-genai>=2.0.1",
+    "gradio>=6.14.0",
+    "ipykernel>=7.2.0",
+    "jupyter>=1.1.1",
+    "langchain>=1.2.18",
+    "langchain-google-genai>=3.2.0",
+    "langchain-mcp-adapters>=0.2.2",
+    "langchain-ollama>=1.1.0",
+    "langsmith>=0.8.3",
+    "numpy>=2.4.4",
+    "ollama>=0.6.2",
+    "playwright>=1.59.0",
+    "pydantic>=2.13.4",
+    "pymupdf>=1.27.2.3",
+    "requests>=2.33.1",
+    "sbvirtualdisplay>=1.4.0",
+]

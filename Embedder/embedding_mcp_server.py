@@ -11,14 +11,19 @@ embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-2")
 
 APPLY = 0.7
 
-def cosine_similarity(vec_a: List[float], vec_b: List[float]) -> float:
+def cosine_similarity(vec_a: List[float], vec_b: List[List[float]]) -> List[float]:
     """Pure numpy cosine similarity. Returns 0.0 - 1.0."""
+    scores = []
     a = np.array(vec_a)
-    b = np.array(vec_b)
-    denom = np.linalg.norm(a) * np.linalg.norm(b)
-    if denom == 0:
-        return 0.0
-    return float(np.dot(a, b) / denom)
+    for b in vec_b:
+        b = np.array(b)
+        denom = np.linalg.norm(a) * np.linalg.norm(b)
+        if denom == 0:
+            scores.append(0.0)
+        else:
+            scores.append(float(np.dot(a, b) / denom))
+    
+    return scores
 
 
 def embed_profile():
@@ -42,19 +47,19 @@ def embed_profile():
         return data
 
 
-def similarity_score(job: str):
+def similarity_score(job: list[str]):
     """Embeds a job posting and calculates the similarity score between profile embedding and job embedding
      
      Args: str of job posting
      
      Returns: True if jobs is relevant to resume and False if job is not relevant to resume"""
-    job_embedding = embeddings.embed_query(job)
+    job_embedding = embeddings.embed_documents(job)
     with open("profile.json", "r") as f:
             data = json.load(f)
     resume_embedding = data["embedding"]
     
     
-    return cosine_similarity(resume_embedding, job_embedding) >= APPLY
+    return cosine_similarity(resume_embedding, job_embedding)
 
    
 # EMBEDDING_TOOLS = [embed_profile, similarity_score]

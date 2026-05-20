@@ -66,8 +66,8 @@ async def use_browser_mcp():
             agent = create_agent(
                 model=model,
                 tools=tools,
-                # system_prompt="You are a job search agent. Use your tools to search and return jobs. Search for all jobs on https://hiring.cafe/. the website does not have a search button, you will have to type in the search bar and click the drop down menu that appears to search. Return one job posting",
-                system_prompt="You are a job applying agent. Use your tools to fill out job forms. the user will provide the job link and their profile. do not submit the application, only fill out the form. some forms may be multiple pages, make sure to fill out every page. some input fields may show a dropdown menu when typing, click the best option from the drop down menu. skip any input fields that are not provided by the user.",
+                system_prompt="You are a job search agent. Use your tools to search and return jobs. Search for all jobs on https://hiring.cafe/. the website does not have a search button, you will have to type in the search bar and click the drop down menu that appears to search. apply any filters that the user requests. Return one job posting",
+                # system_prompt="You are a job applying agent. Use your tools to fill out job forms. the user will provide the job link and their profile. do not submit the application, only fill out the form. some forms may be multiple pages, make sure to fill out every page. some input fields may show a dropdown menu when typing, click the best option from the drop down menu. skip any input fields that are not provided by the user.",
                 response_format=Job,
                 checkpointer=InMemorySaver(),
                 middleware=[
@@ -94,16 +94,16 @@ async def use_browser_mcp():
             # print("Page state retrieved!")
             
 
-            # question = HumanMessage(content="search for ai engineer job")
-            question = HumanMessage(content="""apply to this job: https://careers.pdf.com/careers-home/jobs/1543?mode=apply&iis=LinkedIn with my information: "first_name": "IBRAHEEM",
-  "last_name": "ALORAN",
-  "phone_number": "+1(226)-260-8814",
-  "email": "ibraheemaloran@gmail.com",
-  "location": "Canada",
-  "current company": "Vosyn",
-  "Gender": "Male",
-  "linkedin": "linkedin.com/in/ibraheem-aloran/",
-  "github": "github.com/IbraheemAloran""")
+            question = HumanMessage(content="search for ai engineer jobs that area remote only and max 2 years of experience")
+#             question = HumanMessage(content="""apply to this job: https://careers.pdf.com/careers-home/jobs/1543?mode=apply&iis=LinkedIn with my information: "first_name": "IBRAHEEM",
+#   "last_name": "ALORAN",
+#   "phone_number": "+1(226)-260-8814",
+#   "email": "ibraheemaloran@gmail.com",
+#   "location": "Canada",
+#   "current company": "Vosyn",
+#   "Gender": "Male",
+#   "linkedin": "linkedin.com/in/ibraheem-aloran/",
+# #   "github": "github.com/IbraheemAloran""")
 
             response = await agent.ainvoke(
                 {"messages": [question]},

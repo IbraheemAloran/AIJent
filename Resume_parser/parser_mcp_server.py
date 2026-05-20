@@ -68,6 +68,7 @@ class ResumeParser:
         doc = fitz.open(file_path)
         text = doc[0].get_text()
         result = self.chain.invoke({"input": text})
+        result["file_path"] = file_path
 
         with open("profile.json", "w") as f:
             json.dump(result, f, indent=2)
