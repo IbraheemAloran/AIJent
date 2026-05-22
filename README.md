@@ -4,7 +4,11 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.136+-green)
 ![LangChain](https://img.shields.io/badge/LangChain-1.2+-orange)
 
-An intelligent job search agent that uses AI embeddings and semantic matching to find the most relevant job opportunities based on your resume and preferences. AIJent leverages advanced NLP techniques, web scraping, and agentic workflows to streamline your job search process.
+An intelligent job search agent that uses AI embeddings and semantic matching to find the most relevant job opportunities based on your resume and preferences and automatically applies to jobs for you. AIJent leverages advanced web scraping, and agentic workflows to streamline your job search process.
+
+<img width="1902" height="951" alt="image" src="https://github.com/user-attachments/assets/f9f06aef-d011-418e-9256-3bcd05f9d684" />
+
+
 
 ## Table of Contents
 
@@ -270,55 +274,7 @@ Embedding Creation   User Profile
 
 ---
 
-## Project Structure
 
-```
-AIJent/
-├── README.md                              # Project documentation
-├── pyproject.toml                         # Project configuration and dependencies
-├── profile.json                           # Parsed user profile (generated)
-├── enriched_jobs.json                     # Enriched job listings (generated)
-│
-├── app_gradio.py                          # Gradio web interface
-├── main.py                                # FastAPI server entry point
-├── playground.py                          # Development/testing playground
-├── playground.ipynb                       # Jupyter notebook for experimentation
-│
-├── Resume_parser/                         # Resume parsing module
-│   ├── __init__.py
-│   └── parser_mcp_server.py               # Resume parsing with LLM
-│       ├── ResumeParser class             # PDF → Structured data extraction
-│       ├── Experience/Education/Projects  # Pydantic models for validation
-│       └── Profile model                  # Complete resume structure
-│
-├── Embedder/                              # Embedding and similarity module
-│   └── embedding_mcp_server.py            # Embedding and matching logic
-│       ├── embed_profile()                # Vectorize resume
-│       ├── similarity_score()             # Compute job-resume similarity
-│       ├── cosine_similarity()            # Vector similarity computation
-│       └── APPLY threshold (0.7)          # Similarity cutoff
-│
-├── job_search_agent/                      # Job search and scraping module
-│   ├── job_scrape_mcp.py                  # Primary job scraper
-│   │   ├── get_build_id()                 # Fetch Next.js build ID
-│   │   ├── clean_html()                   # HTML to text cleaning
-│   │   ├── fetch_full_description()       # Detailed job info retrieval
-│   │   └── scrape_jobs()                  # Main scraping orchestration
-│   │
-│   ├── job_scraper.py                     # Alternative scraper implementation
-│   ├── jobs.json                          # Raw job listings
-│   ├── new_jobs.json                      # Recent job additions
-│   ├── limited_jobs.json                  # Sample job subset
-│   ├── enriched_jobs.json                 # Jobs with scores
-│   └── playground.ipynb                   # Job scraping experimentation
-│
-├── SQLAgent/                              # SQL-based job storage and querying
-│   └── sql_agent.py                       # SQL agent implementation
-│
-└── [Other utility files]
-    ├── hiring_cafe_scraper.py             # Alternative scraper
-    ├── hiring_cafe_scraper (1).py         # Another scraper variant
-```
 
 ### Module Responsibilities
 
@@ -719,17 +675,7 @@ To extend AIJent:
 
 ---
 
-## License
 
-[Specify your license here - e.g., MIT, Apache 2.0]
-
----
-
-## Contact & Support
-
-For issues, questions, or suggestions, please open an issue in the project repository or contact the development team.
-
----
 
 **Last Updated:** May 2026
 **Version:** 0.1.0
