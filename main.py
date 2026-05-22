@@ -3,11 +3,16 @@ import uvicorn
 from contextlib import asynccontextmanager
 from Resume_parser.parser_mcp_server import ResumeParser
 # from Embedder.embedding_mcp_server import Embedder
+from database import engine, SessionLocal
+from models import Base, Job
+
+
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-
+    Base.metadata.create_all(bind=engine)
+    
     yield
 
 
@@ -18,7 +23,7 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/")
 async def health():
-    return {"Status": "200 OK"}
+    return {"message": "PostgreSQL connected"}
 
 
 @app.post("/upload-resume")
@@ -34,6 +39,33 @@ async def upload_resume(resume: UploadFile=File(...)):
 
     return {"Result": response}
 
+
+@app.post("/create-jobs")
+async def create_job():
+    db = SessionLocal()
+    job = Job(
+        title="ML Engineer",
+        company="OpenAI"
+    )
+
+    db.add(job)
+    db.commit()
+    db.refresh(job)
+
+    return {
+        "id": job.id,
+        "title": job.title
+    }
+
+
+@app.get("/jobs")
+def get_jobs():
+    db = SessionLocal()
+    jobs = db.query(Job).all()
+
+    db.close()
+
+    return jobs
 
 
 
