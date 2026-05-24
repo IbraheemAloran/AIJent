@@ -44,7 +44,15 @@ def embed_profile():
         with open("profile.json", "w") as f:
             json.dump(data, f, indent=2)
         
-        return data
+        return vector
+
+
+# def index_profile():
+#     with open("profile.json", "r") as f:
+#         data = json.load(f)
+
+    
+     
 
 
 def similarity_score(job: list[str]):
