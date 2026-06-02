@@ -7,7 +7,7 @@ import numpy as np
 
 load_dotenv()
 
-embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-2")
+embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-2-preview")
 
 APPLY = 0.7
 
@@ -38,7 +38,7 @@ def embed_profile():
 
         # print(data)
         # print(data["all_bullet_points_and_summary"])
-        vector = embeddings.embed_query(data["all_bullet_points_and_summary_and_skills"])
+        vector = embeddings.embed_query(data["all_bullet_points_and_summary_and_skills"], output_dimensionality=1536)
         data["embedding"] = vector
 
         with open("profile.json", "w") as f:
@@ -55,19 +55,22 @@ def embed_profile():
      
 
 
-def similarity_score(job: list[str]):
+def embed_jobs(job: list[str]):
     """Embeds a job posting and calculates the similarity score between profile embedding and job embedding
      
      Args: str of job posting
      
      Returns: True if jobs is relevant to resume and False if job is not relevant to resume"""
-    job_embedding = embeddings.embed_documents(job)
-    with open("profile.json", "r") as f:
-            data = json.load(f)
-    resume_embedding = data["embedding"]
+    # job_embedding = embeddings.embed_documents(job)
+    # with open("profile.json", "r") as f:
+    #         data = json.load(f)
+    # resume_embedding = data["embedding"]
+    return embeddings.embed_documents(job, output_dimensionality=1536)
+
+
     
     
-    return cosine_similarity(resume_embedding, job_embedding)
+    # return cosine_similarity(resume_embedding, job_embedding)
 
    
 # EMBEDDING_TOOLS = [embed_profile, similarity_score]
